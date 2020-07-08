@@ -30,3 +30,23 @@ it should use today’s date to get the month and year.
 import sys
 import calendar
 from datetime import datetime
+
+today = datetime.today()
+thisYear = int(today.strftime("%Y"))
+thisMonth = int(today.strftime("%m"))
+
+if(len(sys.argv) == 3):
+  print(sys.argv)
+  cal = calendar.TextCalendar(calendar.SUNDAY)
+  calString = cal.formatmonth(int(sys.argv[2]), int(sys.argv[1]))
+  print(calString)
+elif(len(sys.argv) == 2):
+  cal = calendar.TextCalendar(calendar.SUNDAY)
+  calString = cal.formatmonth(thisYear, int(sys.argv[1]))
+  print(calString)
+elif(len(sys.argv) == 1):
+  cal1 = calendar.TextCalendar(calendar.SUNDAY)
+  cal1String = cal1.formatmonth(thisYear, thisMonth)
+  print(cal1String)
+else:
+  print("Invalid input")
