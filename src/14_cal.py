@@ -31,22 +31,22 @@ import sys
 import calendar
 from datetime import datetime
 
-today = datetime.today()
-thisYear = int(today.strftime("%Y"))
-thisMonth = int(today.strftime("%m"))
+l = len(sys.argv)
 
-if(len(sys.argv) == 3):
-  print(sys.argv)
-  cal = calendar.TextCalendar(calendar.SUNDAY)
-  calString = cal.formatmonth(int(sys.argv[2]), int(sys.argv[1]))
-  print(calString)
-elif(len(sys.argv) == 2):
-  cal = calendar.TextCalendar(calendar.SUNDAY)
-  calString = cal.formatmonth(thisYear, int(sys.argv[1]))
-  print(calString)
-elif(len(sys.argv) == 1):
-  cal1 = calendar.TextCalendar(calendar.SUNDAY)
-  cal1String = cal1.formatmonth(thisYear, thisMonth)
-  print(cal1String)
+if l==1:
+  # No user input/args ()
+  month = datetime.now().month
+  year = datetime.now().year
+elif l==2:
+  # 1 input/arg (month)
+  month = int(sys.argv[1])
+  year = datetime.now().year
+elif l==3:
+  #2 inputs/args (month, year)
+  month = int(sys.argv[1])
+  year = int(sys.argv[2])
 else:
-  print("Invalid input")
+  print('usage: py 14_cal.py [month] [year]')
+  sys.exit(1)
+
+calendar.TextCalendar().prmonth(year, month)
